@@ -3,6 +3,10 @@
 1. **Font Definition in Frontend**:
 
 ```rust
+// frontend/src/state-providers/fonts.ts
+
+
+
 
 const LOCAL_FONTS = [
   {
@@ -17,7 +21,7 @@ const LOCAL_FONTS = [
   // ...
 ];
 ```
-
+// editor/src/messages/tool/tool_messages/text_tool.rs
 2. **Creating Text with Source Sans Pro**:
 When a user creates text with Source Sans Pro, the text tool initializes with these settings:
 
@@ -40,6 +44,11 @@ impl Default for TextOptions {
 When the text tool needs Source Sans Pro, it triggers the font loading process:
 
 ```typescript
+// frontend/src/state-providers/fonts.ts
+
+
+
+
 editor.subscriptions.subscribeJsMessage(TriggerFontLoad, async (triggerFontLoad) => {
 
     const url = await getFontFileUrl("Source Sans Pro", "Regular");
@@ -66,6 +75,11 @@ editor.subscriptions.subscribeJsMessage(TriggerFontLoad, async (triggerFontLoad)
 backend stores the font data in its cache:
 
 ```rust
+// node-graph/gcore/src/text/font_cache.rs
+
+
+
+
 impl FontCache {
     pub fn insert(&mut self, font: Font, preview_url: String, data: Vec<u8>) {
 
@@ -90,6 +104,11 @@ impl FontCache {
 rendering text with Source Sans Pro:
 
 ```rust
+// node-graph/gstd/src/text.rs
+
+
+
+
 fn text<'i: 'n>(
     _: impl Ctx,
     editor: &'i WasmEditorApi,
@@ -122,6 +141,11 @@ fn text<'i: 'n>(
 displaying the editable text box with Source Sans Pro:
 
 ```scss
+// frontend/src/components/panels/Document.svelte
+
+
+
+
 async function displayEditableTextbox(displayEditableTextbox: DisplayEditableTextbox) {
     showTextInput = true;
     await tick();
@@ -150,6 +174,11 @@ async function displayEditableTextbox(displayEditableTextbox: DisplayEditableTex
 calculating text boundaries for Source Sans Pro:
 
 ```rust
+// node-graph/gcore/src/text/to_path.rs
+
+
+
+
 pub fn bounding_box(str: &str, buzz_face: Option<&rustybuzz::Face>, typesetting: TypesettingConfig, for_clipping_test: bool) -> DVec2 {
     // Get the loaded Source Sans Pro face
     let Some(buzz_face) = buzz_face else { return DVec2::ZERO };
