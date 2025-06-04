@@ -21,11 +21,16 @@ const LOCAL_FONTS = [
   // ...
 ];
 ```
-// editor/src/messages/tool/tool_messages/text_tool.rs
+
 2. **Creating Text with Source Sans Pro**:
 When a user creates text with Source Sans Pro, the text tool initializes with these settings:
 
 ```rust
+// editor/src/messages/tool/tool_messages/text_tool.rs
+
+
+
+
 impl Default for TextOptions {
     fn default() -> Self {
         Self {
